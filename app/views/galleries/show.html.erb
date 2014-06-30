@@ -1,0 +1,4 @@
+<h1><%= @gallery.name %></h1>
+<p><%= @gallery.description.capitalize %></p>
+<%= link_to "Edit", "/galleries/#{@gallery.id}/edit" %>
+<%= link_to "Destroy", "/galleries/#{@gallery.id}", method: :delete, data: { confirm: "Are you sure?" } %>
