@@ -7,5 +7,7 @@ class CreateImages < ActiveRecord::Migration
       t.references :gallery
       t.timestamps
     end
+
+    add_index :images, :gallery_id
   end
 end

@@ -1,6 +1,7 @@
 class ImagesController < ApplicationController
   def show
-    @image = Image.find(params[:id])
+    gallery = Gallery.find(params[:gallery_id])
+    @image = gallery.images.find(params[:id])
   end
 
   def new
@@ -9,10 +10,11 @@ class ImagesController < ApplicationController
   end
 
   def create
-    image = Image.new(image_params)
-    image.gallery_id = params[:gallery_id]
-    image.save
-    redirect_to gallery_path(params[:gallery_id])
+    gallery = Gallery.find(params[:gallery_id])
+
+    gallery.images.create(image_params)
+
+    redirect_to gallery
   end
 
   def edit
