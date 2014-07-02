@@ -21,8 +21,9 @@ class GalleriesController < ApplicationController
   end
 
   def update
-    Gallery.update(params[:id], gallery_params)
-    redirect_to "/galleries/#{params[:id]}"
+    gallery = Gallery.find(params[:id])
+    gallery.update(gallery_params)
+    redirect_to gallery_path(gallery.id)
   end
 
   def destroy
@@ -32,6 +33,7 @@ class GalleriesController < ApplicationController
   end
 
   private
+
   def gallery_params
     params.require(:gallery).permit(:name, :description)
   end
