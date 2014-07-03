@@ -11,14 +11,19 @@
       padding-left: 0;
     }
     li {
-    margin-bottom: 10px;
+      margin-bottom: 10px;
     }
   </style>
 </head>
-<body>
-<%= link_to "Sign up", new_user_path %>
-<%= link_to "Sign in", new_session_path %>
-<%= yield %>
+  <body>
+    <% if signed_in? %>
+      <%= current_user.email %>
+      <%= link_to "Sign out", session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Sign up", new_user_path %>
+      <%= link_to "Sign in", new_session_path %>
+    <% end %>
+    <%= yield %>
 
-</body>
+  </body>
 </html>
