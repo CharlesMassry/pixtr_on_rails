@@ -14,7 +14,6 @@ class ImagesController < ApplicationController
 
     @image = @gallery.images.new(image_params)
     if @image.save
-      @image.save
       redirect_to gallery
     else
       render :new
@@ -29,10 +28,9 @@ class ImagesController < ApplicationController
   def update
     @gallery = find_gallery
 
-    @image = find_image_in(gallery)
-    if @image.update(image_params).errors
-      @image.update(image_params).errors
-      redirect_to gallery_image_path(image.gallery_id, image.id)
+    @image = find_image_in(@gallery)
+    if @image.update(image_params)
+      redirect_to [@gallery, @image]
     else
       render :edit
     end
@@ -55,7 +53,7 @@ class ImagesController < ApplicationController
     gallery.images.find(params[:id])
   end
 
-  def image_params
+  def image_params # strong_params
     params.require(:image).permit(:name, :description, :url)
   end
 end
