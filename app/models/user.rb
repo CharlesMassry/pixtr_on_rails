@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   has_many :liked_images, through: :likes, source: :image
   has_many :likes
 
+  has_many :hated_images, through: :hates, source: :image
+  has_many :hates
+
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
 
@@ -28,5 +31,13 @@ class User < ActiveRecord::Base
 
   def liked?(image)
     liked_images.include?(image)
+  end
+
+  def not_hated?(image)
+    hated?(image) == false
+  end
+
+  def hated?(image)
+    hated_images.include?(image)
   end
 end

@@ -5,6 +5,7 @@ class Image < ActiveRecord::Base
 
   has_many :comments
   has_many :likes
+  has_many :hates
 
   validates :name, presence: true
   validates :description, presence: true
@@ -12,5 +13,9 @@ class Image < ActiveRecord::Base
 
   def liked_count
     Like.where(image_id: self.id).size
+  end
+
+  def hated_count
+    Hate.where(image_id: self.id).size
   end
 end

@@ -10,8 +10,15 @@
 <% else %>
   <%= link_to "Unlike", unlike_gallery_image_path(@gallery, @image), method: :delete %>
 <% end %>
+<br/>
+<%= @image.hated_count %> Hates
 
 
+<% if current_user.not_hated?(@image) %>
+<%= link_to "Hate", hate_gallery_image_path(@gallery, @image), method: :post %>
+<% else %>
+<%= link_to "Unhate", unhate_gallery_image_path(@gallery, @image), method: :delete %>
+<% end %>
 <%= render @image.comments %>
 
 <%= form_for [@gallery, @image, @comment] do |form| %>
