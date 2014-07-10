@@ -2,8 +2,9 @@
 <%= image_tag @image.url, width: 300 %>
 <%= link_to "Edit Image", edit_gallery_image_path(@image.gallery_id, @image.id) %>
 <%= link_to "Delete Image", [@image.gallery, @image], method: :delete, data: { confirm: "Are you sure?" } %>
+
 <br/>
-<%= @image.liked_count %> Likes
+<%= pluralize(@image.liked_count, "Like") %>
 
 <% if current_user.not_liked?(@image) %>
   <%= link_to "Like", like_gallery_image_path(@gallery, @image), method: :post %>
@@ -11,7 +12,8 @@
   <%= link_to "Unlike", unlike_gallery_image_path(@gallery, @image), method: :delete %>
 <% end %>
 <br/>
-<%= @image.hated_count %> Hates
+
+<%= pluralize(@image.hated_count, "Hate") %>
 
 
 <% if current_user.not_hated?(@image) %>
