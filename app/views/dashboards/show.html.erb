@@ -1,0 +1,13 @@
+<h2>Galleries</h2>
+<h4>
+<%= link_to "New Gallery", new_gallery_path %>
+</h4>
+<%= render(current_user.galleries) || "No Galleries" %>
+<h2>Groups</h2>
+<h4>
+<%= link_to "New Group", new_group_path %>
+</h4>
+<div>
+  <%= link_to "Browse Groups", groups_path %>
+</div>
+<%= render(current_user.groups) || "No Groups" %>

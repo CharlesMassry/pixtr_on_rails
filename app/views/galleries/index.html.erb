@@ -1,4 +1,4 @@
 <%= link_to "New Gallery", "/galleries/new" %>
 <% @galleries.each do |gallery| %>
-  <%= link_to gallery.name, "/galleries/#{gallery.id}" %>
+  <%= render gallery%>
 <% end %>

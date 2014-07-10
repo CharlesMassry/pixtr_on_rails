@@ -19,10 +19,16 @@
     <% if signed_in? %>
       <%= current_user.email %>
       <%= link_to "Sign out", session_path, method: :delete %>
+      <%= link_to "Dashboard", root_path %>
     <% else %>
       <%= link_to "Sign up", new_user_path %>
       <%= link_to "Sign in", new_session_path %>
     <% end %>
+
+    <% flash.each do |key, value| %>
+      <p class="<%= key %>"><%= value %></p>
+    <% end %>
+
     <%= yield %>
 
   </body>

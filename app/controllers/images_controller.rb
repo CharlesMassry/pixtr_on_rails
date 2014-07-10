@@ -1,7 +1,8 @@
 class ImagesController < ApplicationController
   def show
-    gallery = find_gallery
-    @image = find_image_in(gallery)
+    @gallery = find_gallery
+    @image = find_image_in(@gallery)
+    @comment = Comment.new
   end
 
   def new
@@ -10,9 +11,9 @@ class ImagesController < ApplicationController
   end
 
   def create
-    @gallery = find_gallery
+    gallery = find_gallery
 
-    @image = @gallery.images.new(image_params)
+    @image = gallery.images.new(image_params)
     if @image.save
       redirect_to gallery
     else
@@ -55,6 +56,9 @@ class ImagesController < ApplicationController
   end
 
   def image_params # strong_params
-    params.require(:image).permit(:name, :description, :url)
+    #params.require(:image).permit(:name, :description, :url, group_ids: [])
+    params.
+      require(:image).
+      permit(:name, :description, :url, group_ids: [])
   end
 end

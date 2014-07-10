@@ -1,0 +1,11 @@
+<h1><%= @group.name %></h1>
+
+<% unless @group.users.include?(current_user) %>
+  <%= link_to "Join Group", join_group_path(@group), method: :post %>
+<% end %>
+<ul>
+  <% @group.images.each do |image| %>
+    <li><%= render image  %></li>
+  <% end %>
+</ul>
+

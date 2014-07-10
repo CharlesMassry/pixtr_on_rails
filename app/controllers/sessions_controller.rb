@@ -3,11 +3,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = authenticate_session(session_params)
+    user = authenticate_session(session_params)
 
-    if sign_in(@user)
-      redirect_to galleries_path
+    if sign_in(user)
+      redirect_to root_path
     else
+      flash.now.notice = "Invalid Email or Password"
       render :new
     end
   end

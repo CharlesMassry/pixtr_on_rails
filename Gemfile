@@ -29,6 +29,10 @@ gem 'spring',        group: :development
 
 gem 'monban', '~> 0.1.0'
 
+group :development do
+  gem 'quiet_assets'
+end
+
 group :production do
   gem 'rails_12factor'
   gem 'thin'

@@ -15,7 +15,8 @@ class GalleriesController < ApplicationController
   end
 
   def create
-    @gallery = Gallery.new(gallery_params)
+    final_params = gallery_params.merge(user_id: current_user.id)
+    @gallery = Gallery.new(final_params)
     if @gallery.save
       redirect_to galleries_path
     else
@@ -30,7 +31,7 @@ class GalleriesController < ApplicationController
   def update
     @gallery = find_gallery
     if @gallery.update(gallery_params)
-      redirect_to gallery_path(gallery.id)
+      redirect_to gallery_path(@gallery.id)
     else
       render :edit
     end
