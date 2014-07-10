@@ -19,6 +19,10 @@ Rails.application.routes.draw do
 
   resources :galleries do
     resources :images, except: [:index] do
+      member do
+        post "like" => "likes#create", as: "like"
+        delete "unlike" => "likes#destroy", as: "unlike"
+      end
       resources :comments, only: [:new, :create]
     end
   end
