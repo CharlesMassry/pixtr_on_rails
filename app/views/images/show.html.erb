@@ -4,6 +4,7 @@
 <%= link_to "Delete Image", [@image.gallery, @image], method: :delete, data: { confirm: "Are you sure?" } %>
 
 <div>
+  <%= pluralize(@image.tags.count, "Tag") %><br/>
   <% @image.tags.each do |tag| %>
     <%= link_to tag, tag_path(tag)  %>
   <% end %>
