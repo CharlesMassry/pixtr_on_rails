@@ -7,6 +7,8 @@ class Image < ActiveRecord::Base
   has_many :likes
   has_many :hates
 
+  acts_as_taggable
+
   validates :name, presence: true
   validates :description, presence: true
   validates :url, presence: true

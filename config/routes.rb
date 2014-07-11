@@ -28,4 +28,6 @@ Rails.application.routes.draw do
       resources :comments, only: [:new, :create]
     end
   end
+
+  resources :tags, only: [:show]
 end

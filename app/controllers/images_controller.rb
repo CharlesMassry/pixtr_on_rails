@@ -14,6 +14,7 @@ class ImagesController < ApplicationController
     gallery = find_gallery
 
     @image = gallery.images.new(image_params)
+    @image.tag_list = params[:image][:tag_list]
     if @image.save
       redirect_to gallery
     else
@@ -30,6 +31,7 @@ class ImagesController < ApplicationController
     @gallery = find_gallery
 
     @image = find_image_in(@gallery)
+    @image.tag_list = params[:image][:tag_list]
     if @image.update(image_params)
       redirect_to [@gallery, @image]
     else

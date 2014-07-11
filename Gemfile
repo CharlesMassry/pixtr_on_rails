@@ -29,6 +29,8 @@ gem 'spring',        group: :development
 
 gem 'monban', '~> 0.1.0'
 
+gem 'acts-as-taggable-on', '~> 3.0'
+
 group :development do
   gem 'quiet_assets'
 end
