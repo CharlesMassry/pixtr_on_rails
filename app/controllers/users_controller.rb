@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
     if @user.valid?              # #valid? - ar method
       sign_in(@user)
-      redirect_to galleries_path
+      redirect_to root_path
     else
       render :new
     end
