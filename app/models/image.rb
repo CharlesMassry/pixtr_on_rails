@@ -4,7 +4,7 @@ class Image < ActiveRecord::Base
   has_and_belongs_to_many :groups
 
   has_many :comments
-  has_many :likes
+  has_many :likes, as: :content, dependent: :destroy
   has_many :hates
 
   acts_as_taggable
@@ -14,7 +14,7 @@ class Image < ActiveRecord::Base
   validates :url, presence: true
 
   def liked_count
-    Like.where(image_id: self.id).size
+    Like.where(content_id: self.id).size
   end
 
   def hated_count

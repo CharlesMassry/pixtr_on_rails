@@ -4,11 +4,11 @@ class User < ActiveRecord::Base
   has_many :group_memberships
   has_many :groups, through: :group_memberships
 
-  has_many :liked_images, through: :likes, source: :image
   has_many :likes
+  has_many :stalkers, as: :content, class_name: "Like", dependent: :destroy
 
-  has_many :hated_images, through: :hates, source: :image
   has_many :hates
+  has_many :hated_images, through: :hates, source: :image
 
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
@@ -25,12 +25,12 @@ class User < ActiveRecord::Base
     groups.delete(group)
   end
 
-  def not_liked?(image)
-    liked?(image) == false
+  def not_liked?(content)
+    liked?(content) == false
   end
 
-  def liked?(image)
-    liked_images.include?(image)
+  def liked?(content)
+    likes.where(content: content).empty?
   end
 
   def not_hated?(image)
@@ -40,4 +40,5 @@ class User < ActiveRecord::Base
   def hated?(image)
     hated_images.include?(image)
   end
+
 end

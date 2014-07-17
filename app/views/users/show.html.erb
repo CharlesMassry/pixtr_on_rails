@@ -1,3 +1,10 @@
-<h3><%= @user.email %>'s Galleries</h1>
-
+<h3><%= @user.email %></h1>
+<div>
+Likes: <%= @user.stalkers.count %>
+<%# if current_user.liked?(@user) && current_user != @user %>
+<%= link_to "Like", like_user_path, method: :post %>
+<%# elsif !current_user.liked?(@user) %>
+<%= link_to "Unlike", unlike_user_path, method: :delete %>
+<%# end %>
+</div>
 <%= render @user.galleries %>

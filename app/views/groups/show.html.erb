@@ -1,10 +1,20 @@
 <h1><%= @group.name %></h1>
+<div>
+  Likes: <%= @group.likes.count %>
+  <% if current_user.liked?(@group) %>
+    <%= link_to "Like", like_group_path(@group), method: :post %>
+  <% else %>
+      <%= link_to "Unlike", unlike_group_path(@group), method: :delete %>
+  <% end %>
+</div>
 
+<div>
 <% if current_user.member?(@group) %>
   <%= link_to "Leave Group", leave_group_path(@group), method: :delete, data: { confirm: "Are You Sure?" } %>
 <% else %>
   <%= link_to "Join Group", join_group_path(@group), method: :post %>
 <% end %>
+</div>
 <ul>
   <% @group.images.each do |image| %>
     <li><%= render image  %></li>

@@ -12,7 +12,7 @@
 <br/>
 <%= pluralize(@image.liked_count, "Like") %>
 
-<% if current_user.not_liked?(@image) %>
+<% if current_user.liked?(@image) %>
   <%= link_to "Like", like_gallery_image_path(@gallery, @image), method: :post %>
 <% else %>
   <%= link_to "Unlike", unlike_gallery_image_path(@gallery, @image), method: :delete %>
