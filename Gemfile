@@ -19,6 +19,7 @@ gem 'acts-as-taggable-on', '~> 3.0'
 group :development do
   gem 'spring'
   gem 'quiet_assets'
+  gem 'rails-erd'
 end
 
 group :development, :test do
