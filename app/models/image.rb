@@ -5,7 +5,7 @@ class Image < ActiveRecord::Base
 
   has_many :comments
   has_many :likes, as: :content, dependent: :destroy
-  has_many :hates
+  has_many :hates, as: :hateable, dependent: :destroy
 
   acts_as_taggable
 
@@ -18,6 +18,6 @@ class Image < ActiveRecord::Base
   end
 
   def hated_count
-    Hate.where(image_id: self.id).size
+    Hate.where(hateable_id: self.id).size
   end
 end

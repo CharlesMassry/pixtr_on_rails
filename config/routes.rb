@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     member do
       post "like" => "user_likes#create", as: "like"
       delete "unlike" => "user_likes#destroy", as: "unlike"
+      post "hate" => "hates#create", as: "hate"
+      delete "unhate" => "hates#destroy", as: "unhate"
     end
   end
 
@@ -19,6 +21,8 @@ Rails.application.routes.draw do
     member do
       post "like" => "group_likes#create", as: "like"
       delete "unlike" => "group_likes#destroy", as: "unlike"
+      post "hate" => "hates#create", as: "hate"
+      delete "unhate" => "hates#destroy", as: "unhate"
       post "join" => "group_memberships#create"
       delete "leave" => "group_memberships#destroy"
     end
@@ -28,6 +32,8 @@ Rails.application.routes.draw do
     member do
       post "like" => "gallery_likes#create", as: "like"
       delete "unlike" => "gallery_likes#destroy", as: "unlike"
+      post "hate" => "hates#create", as: "hate"
+      delete "unhate" => "hates#destroy", as: "unhate"
     end
     resources :images, except: [:index] do
       member do
@@ -36,7 +42,12 @@ Rails.application.routes.draw do
         post "hate" => "hates#create", as: "hate"
         delete "unhate" => "hates#destroy", as: "unhate"
       end
-      resources :comments, only: [:new, :create]
+      resources :comments, only: [:new, :create] do
+        member do
+          post "hate" => "hates#create", as: "hate"
+          delete "unhate" => "hates#destroy", as: "unhate"
+        end
+      end
     end
   end
 

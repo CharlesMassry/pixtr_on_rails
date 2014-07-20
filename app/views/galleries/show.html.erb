@@ -1,10 +1,20 @@
 <h1><%= @gallery.name %></h1>
+<div>
 Likes: <%= @gallery.likes.count %>
 <% if current_user.liked?(@gallery) %>
   <%= link_to "Like", like_gallery_path(@gallery), method: :post %>
 <% else %>
     <%= link_to "Unlike", unlike_gallery_path(@gallery), method: :delete %>
 <% end %>
+</div>
+<div>
+Hates: <%= @gallery.hates.count %>
+<% if current_user.hated?(@gallery) %>
+  <%= link_to "Hate", hate_gallery_path(@gallery), method: :post %>
+<% else %>
+    <%= link_to "Unhate", unhate_gallery_path(@gallery), method: :delete %>
+<% end %>
+</div>
 <p><%= @gallery.description.capitalize %></p>
 
 <nav>

@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :stalkers, as: :content, class_name: "Like", dependent: :destroy
 
   has_many :hates
-  has_many :hated_images, through: :hates, source: :image
+  has_many :haters, as: :hateable, class_name: "Hate", dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
@@ -33,12 +33,12 @@ class User < ActiveRecord::Base
     likes.where(content: content).empty?
   end
 
-  def not_hated?(image)
-    hated?(image) == false
+  def not_hated?(hate)
+    hated?(hate) == false
   end
 
-  def hated?(image)
-    hated_images.include?(image)
+  def hated?(hate)
+    hates.where(hateable: hate).empty?
   end
 
 end

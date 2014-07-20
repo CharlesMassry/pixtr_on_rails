@@ -22,7 +22,7 @@
 <%= pluralize(@image.hated_count, "Hate") %>
 
 
-<% if current_user.not_hated?(@image) %>
+<% if current_user.hated?(@image) %>
 <%= link_to "Hate", hate_gallery_image_path(@gallery, @image), method: :post %>
 <% else %>
 <%= link_to "Unhate", unhate_gallery_image_path(@gallery, @image), method: :delete %>

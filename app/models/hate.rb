@@ -1,5 +1,5 @@
 class Hate < ActiveRecord::Base
-  validates :user_id, uniqueness: { scope: :image_id }
-  belongs_to :image
+  validates :user_id, uniqueness: { scope: [:hateable_id, :hateable_type] }
+  belongs_to :hateable, polymorphic: true
   belongs_to :user
 end

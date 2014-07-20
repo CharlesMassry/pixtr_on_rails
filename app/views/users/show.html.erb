@@ -1,10 +1,19 @@
 <h3><%= @user.email %></h1>
 <div>
-Likes: <%= @user.stalkers.count %>
-<% if current_user.liked?(@user) && current_user != @user %>
-  <%= link_to "Like", like_user_path, method: :post %>
-<% elsif !current_user.liked?(@user) %>
-  <%= link_to "Unlike", unlike_user_path, method: :delete %>
-<% end %>
+  Likes: <%= @user.stalkers.count %>
+  <% if current_user.liked?(@user) && current_user != @user %>
+    <%= link_to "Like", like_user_path, method: :post %>
+  <% elsif !current_user.liked?(@user) %>
+    <%= link_to "Unlike", unlike_user_path, method: :delete %>
+  <% end %>
+</div>
+
+<div>
+  Hates: <%= @user.haters.count %>
+  <% if current_user.hated?(@user) %>
+    <%= link_to "Hate", hate_user_path(@user), method: :post %>
+  <% else %>
+    <%= link_to "Unhate", unhate_user_path(@user), method: :delete %>
+  <% end %>
 </div>
 <%= render @user.galleries %>

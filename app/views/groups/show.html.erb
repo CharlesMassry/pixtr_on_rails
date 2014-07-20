@@ -7,6 +7,14 @@
       <%= link_to "Unlike", unlike_group_path(@group), method: :delete %>
   <% end %>
 </div>
+<div>
+  Hates: <%= @group.hates.count %>
+  <% if current_user.hated?(@group) %>
+    <%= link_to "Hate", hate_group_path(@group), method: :post %>
+  <% else %>
+      <%= link_to "Unhate", unhate_group_path(@group), method: :delete %>
+  <% end %>
+</div>
 
 <div>
 <% if current_user.member?(@group) %>
