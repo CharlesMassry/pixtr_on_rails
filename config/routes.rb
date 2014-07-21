@@ -44,6 +44,8 @@ Rails.application.routes.draw do
       end
       resources :comments, only: [:new, :create] do
         member do
+          post "like" => "comment_likes#create", as: "like"
+          delete "like" => "comment_likes#destroy", as: "unlike"
           post "hate" => "hates#create", as: "hate"
           delete "unhate" => "hates#destroy", as: "unhate"
         end
