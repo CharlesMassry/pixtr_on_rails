@@ -3,14 +3,14 @@ class HatesController < ApplicationController
 
   def create
     this_route = request.fullpath
-    this_route.sub!(/\/comments\/\d|\/hate/, '')
+    this_route.sub!(/\/comments.*|\/hate/, '')
     Hate.create(user: current_user, hateable: @hateable)
     redirect_to this_route
   end
 
   def destroy
     this_route = request.fullpath
-    this_route.sub!(/\/comments\/\d|\/unhate/, '')
+    this_route.sub!(/\/comments.*|\/unhate/, '')
     hate = Hate.find_by(user: current_user, hateable: @hateable)
     hate.destroy
     redirect_to this_route
